@@ -128,6 +128,7 @@ func checkPromptType(prompt any) bool {
 }
 
 // CompletionRequest represents a request structure for completion API.
+// expanded with some fields for llamacpp https://github.com/ggerganov/llama.cpp/blob/master/examples/server/README.md#api-endpoints
 type CompletionRequest struct {
 	Model            string   `json:"model"`
 	Prompt           any      `json:"prompt,omitempty"`
@@ -135,12 +136,15 @@ type CompletionRequest struct {
 	MaxTokens        int      `json:"max_tokens,omitempty"`
 	Temperature      float32  `json:"temperature,omitempty"`
 	TopP             float32  `json:"top_p,omitempty"`
+	MinP             float32  `json:"min_p,omitempty"`
+	TopK             float32  `json:"top_k,omitempty"`
 	N                int      `json:"n,omitempty"`
 	Stream           bool     `json:"stream,omitempty"`
 	LogProbs         int      `json:"logprobs,omitempty"`
 	Echo             bool     `json:"echo,omitempty"`
 	Stop             []string `json:"stop,omitempty"`
 	PresencePenalty  float32  `json:"presence_penalty,omitempty"`
+	RepeatPenalty    float32  `json:"repeat_penalty,omitempty"`
 	FrequencyPenalty float32  `json:"frequency_penalty,omitempty"`
 	BestOf           int      `json:"best_of,omitempty"`
 	// LogitBias is must be a token id string (specified by their token ID in the tokenizer), not a word string.
